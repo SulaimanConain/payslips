@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salary Data Insights</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .plot-container {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Salary Data Insights (Amount in CAD$)</h1>
+        
+        <div class="plot-container">
+            {{ plot_div|safe }}
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {{ summary_table|safe }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
