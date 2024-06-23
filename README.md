@@ -11,7 +11,8 @@ This Flask application provides insights into salary data from an Excel file. It
 
 ## Screenshots
 
-![Screenshot 1](![image](https://github.com/SulaimanConain/payslips/assets/88006688/50f74e31-d976-4822-af4d-9e12b16b3486))
+![image](https://github.com/SulaimanConain/payslips/assets/88006688/75862f0e-12d7-49cb-88f7-df4b0e0d738b)
+
 
 
 ## Installation
