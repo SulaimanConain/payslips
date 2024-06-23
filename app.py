@@ -47,7 +47,7 @@ fig.add_trace(go.Pie(labels=labels, values=sizes, hole=.3, name='Proportion of T
 
 # Update layout
 fig.update_layout(
-    title_text="Salary Data Insights",
+    title_text="",
     height=700,
     margin=dict(l=50, r=50, b=50, t=80),
     showlegend=False,
