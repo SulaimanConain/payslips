@@ -1,7 +1,7 @@
-from flask import Flask, render_template
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from flask import Flask, render_template
 import plotly.io as pio
 
 app = Flask(__name__)
@@ -60,6 +60,11 @@ fig.update_layout(
         font=dict(size=14)
     )]
 )
+
+# Set x-axis properties to ensure every month is displayed
+fig.update_xaxes(tickmode='linear', dtick='M1', tickformat='%b\n%Y', row=1, col=1)
+fig.update_xaxes(tickmode='linear', dtick='M1', tickformat='%b\n%Y', row=1, col=2)
+fig.update_xaxes(tickmode='linear', dtick='M1', tickformat='%b\n%Y', row=2, col=1)
 
 # Create summary table as HTML
 summary_table = pd.DataFrame({
