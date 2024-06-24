@@ -1,3 +1,6 @@
+# Links
+{https://payslips.onrender.com}
+
 # Salary Insights Flask App
 
 This Flask application provides insights into salary data from an Excel file. It includes visualizations using Plotly to showcase total pay, tax paid, salary in hand over time, and a pie chart showing the proportion of tax paid to total pay.
