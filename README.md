@@ -22,7 +22,7 @@ This Flask application provides insights into salary data from an Excel file. It
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone https://github.com/SulaimanConain/payslips.git
    cd repository
    pip install -r requirements.txt
    python app.py
