@@ -2,47 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Salary Data Insights</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Custom CSS */
-        .container {
-            margin-top: 50px;
-        }
-        .plot-container {
-            margin-bottom: 30px;
-        }
-        .summary-table {
-            margin-top: 30px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Slip Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header class="text-center">
-            <h1>Salary Data Insights</h1>
-            <p class="lead">(Amount in CAD$)</p>
-        </header>
-        
-        <!-- Plot Container -->
-        <div class="plot-container">
-            {{ plot_div|safe }}
-        </div>
-
-        <!-- Summary Table -->
+        <h1 class="mt-4 mb-4">Pay Slip Analysis</h1>
         <div class="row">
-            <div class="col-md-8 offset-md-2 summary-table">
+            <div class="col-12">
+                {{ plot_div|safe }}
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <h2>Summary</h2>
                 {{ summary_table|safe }}
             </div>
         </div>
     </div>
-
-    <!-- Optional: jQuery and Popper.js (for Bootstrap JS) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
