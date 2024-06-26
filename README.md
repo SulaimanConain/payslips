@@ -1,3 +1,6 @@
+# Links
+{https://payslips.onrender.com}
+
 # Salary Insights Flask App
 
 This Flask application provides insights into salary data from an Excel file. It includes visualizations using Plotly to showcase total pay, tax paid, salary in hand over time, and a pie chart showing the proportion of tax paid to total pay.
@@ -19,7 +22,7 @@ This Flask application provides insights into salary data from an Excel file. It
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone https://github.com/SulaimanConain/payslips.git
    cd repository
    pip install -r requirements.txt
    python app.py
@@ -43,4 +46,4 @@ Explain how to use or interact with your Flask application.
 
 ## Contact
 
-For questions or feedback, please contact [Sulaiman Conain Mohammed](mailto:mohammedsulaimanconain@gmail.com).
+For questions or feedback, please contact [Sulaiman Conain Mohammed](mohammedsulaimanconain@gmail.com).
