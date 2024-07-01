@@ -1,5 +1,5 @@
 # Links
-{https://payslips.onrender.com}
+https://payslips.onrender.com
 
 # Salary Insights Flask App
 
