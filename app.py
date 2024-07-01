@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 
 # Load your data
-file_path = 'Pay_slip_excel.csv'  # Update this path with your file
-df = pd.read_csv(file_path)
+file_path = 'Pay_slip_excel.xlsx'  # Update this path with your file
+df = pd.read_excel(file_path)
 
 # Convert 'Pay slip Date' to datetime
 df['Pay slip Date'] = pd.to_datetime(df['Pay slip Date'])
