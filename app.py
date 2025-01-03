@@ -1,6 +1,5 @@
 import pandas as pd
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 from flask import Flask, render_template
 import plotly.io as pio
 from datetime import datetime, timedelta
@@ -26,33 +25,18 @@ total_tax_paid = df['Tax Paid'].sum()
 total_amount_returned = df['Retured Amount'].sum()
 total_without_tax = df['total without tax'].sum()
 
-# Get current date (for demonstration, let's use the last date in the dataset)
-current_date = df['Pay slip Date'].max()
-
-# Calculate earnings for the current month
-current_month = df[df['Pay slip Date'].dt.to_period('M') == current_date.to_period('M')]
-current_month_total = current_month['Total Pay'].sum()
-current_month_tax = current_month['Tax Paid'].sum()
-current_month_without_tax = current_month['total without tax'].sum()
-
-# Calculate earnings for the last two weeks
-two_weeks_ago = current_date - timedelta(days=14)
-last_two_weeks = df[df['Pay slip Date'] >= two_weeks_ago]
-last_two_weeks_total = last_two_weeks['Total Pay'].sum()
-last_two_weeks_tax = last_two_weeks['Tax Paid'].sum()
-last_two_weeks_without_tax = last_two_weeks['total without tax'].sum()
-
-# Function to create year-wise bar charts
+# Function to create year-wise line charts
 def create_year_wise_charts(year_df, year):
     fig = go.Figure()
-    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['Total Pay'], name='Total Pay', marker_color='blue'))
-    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['Tax Paid'], name='Tax Paid', marker_color='red'))
-    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['total without tax'], name='Salary Without Tax', marker_color='green'))
+    fig.add_trace(go.Scatter(x=year_df['Pay slip Date'], y=year_df['Total Pay'], mode='lines', name='Total Pay', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=year_df['Pay slip Date'], y=year_df['Tax Paid'], mode='lines', name='Tax Paid', line=dict(color='red')))
+    fig.add_trace(go.Scatter(x=year_df['Pay slip Date'], y=year_df['total without tax'], mode='lines', name='Salary Without Tax', line=dict(color='green')))
     fig.update_layout(
         title=f'Pay Slip Analysis for {year}',
         xaxis_title='Date',
         yaxis_title='Amount (CAD$)',
-        barmode='group'
+        height=500,  # Increase height for better visibility
+        margin=dict(l=50, r=50, b=50, t=80)
     )
     return pio.to_html(fig, full_html=False)
 

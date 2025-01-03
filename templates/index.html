@@ -19,12 +19,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Insights</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -44,26 +38,31 @@
             </div>
         </div>
 
+        <!-- Year Buttons -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" onclick="showYear('2023')">2023</button>
+                <button class="btn btn-primary" onclick="showYear('2024')">2024</button>
+                <button class="btn btn-primary" onclick="showYear('2025')">2025</button>
+            </div>
+        </div>
+
         <!-- Year-wise Plots -->
         <div class="row">
-            <div class="col-md-4">
-                <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+            <div class="col-12">
+                <div id="year-2023-plot" class="card shadow-sm mb-4 animate__animated animate__fadeInUp" style="display: none;">
                     <div class="card-body">
                         <h2 class="card-title">2023</h2>
                         {{ year_2023_plot|safe }}
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+                <div id="year-2024-plot" class="card shadow-sm mb-4 animate__animated animate__fadeInUp" style="display: none;">
                     <div class="card-body">
                         <h2 class="card-title">2024</h2>
                         {{ year_2024_plot|safe }}
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+                <div id="year-2025-plot" class="card shadow-sm mb-4 animate__animated animate__fadeInUp" style="display: none;">
                     <div class="card-body">
                         <h2 class="card-title">2025</h2>
                         {{ year_2025_plot|safe }}
@@ -84,6 +83,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Function to show/hide year-wise plots
+        function showYear(year) {
+            // Hide all year plots
+            document.getElementById('year-2023-plot').style.display = 'none';
+            document.getElementById('year-2024-plot').style.display = 'none';
+            document.getElementById('year-2025-plot').style.display = 'none';
+
+            // Show the selected year plot
+            document.getElementById(`year-${year}-plot`).style.display = 'block';
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
