@@ -79,7 +79,6 @@ summary_table = pd.DataFrame({
 def index():
     return render_template(
         'index.html',
-        plot_div=pio.to_html(fig, full_html=False),
         summary_table=summary_table,
         year_2023_plot=year_2023_plot,
         year_2024_plot=year_2024_plot,
