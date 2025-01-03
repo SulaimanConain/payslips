@@ -5,3 +5,27 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.navbar {
+    margin-bottom: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #343a40;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.animate__animated {
+    animation-duration: 1s;
+}
