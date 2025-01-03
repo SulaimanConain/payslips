@@ -25,18 +25,19 @@ total_tax_paid = df['Tax Paid'].sum()
 total_amount_returned = df['Retured Amount'].sum()
 total_without_tax = df['total without tax'].sum()
 
-# Function to create year-wise line charts
+# Function to create year-wise bar charts
 def create_year_wise_charts(year_df, year):
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=year_df['Pay slip Date'], y=year_df['Total Pay'], mode='lines', name='Total Pay', line=dict(color='blue')))
-    fig.add_trace(go.Scatter(x=year_df['Pay slip Date'], y=year_df['Tax Paid'], mode='lines', name='Tax Paid', line=dict(color='red')))
-    fig.add_trace(go.Scatter(x=year_df['Pay slip Date'], y=year_df['total without tax'], mode='lines', name='Salary Without Tax', line=dict(color='green')))
+    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['Total Pay'], name='Total Pay', marker_color='blue'))
+    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['Tax Paid'], name='Tax Paid', marker_color='red'))
+    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['total without tax'], name='Salary Without Tax', marker_color='green'))
     fig.update_layout(
         title=f'Pay Slip Analysis for {year}',
         xaxis_title='Date',
         yaxis_title='Amount (CAD$)',
         height=500,  # Increase height for better visibility
-        margin=dict(l=50, r=50, b=50, t=80)
+        margin=dict(l=50, r=50, b=50, t=80),
+        barmode='group'
     )
     return pio.to_html(fig, full_html=False)
 
