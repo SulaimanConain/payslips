@@ -31,15 +31,48 @@
 
     <div class="container mt-4">
         <h1 class="text-center mb-4 animate__animated animate__fadeIn">Pay Slip Analysis</h1>
+
+        <!-- Combined Yearly Plot -->
         <div class="row">
             <div class="col-12">
                 <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
-                        {{ plot_div|safe }}
+                        <h2 class="card-title">All Years Combined</h2>
+                        {{ combined_plot|safe }}
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Year-wise Plots -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <h2 class="card-title">2023</h2>
+                        {{ year_2023_plot|safe }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <h2 class="card-title">2024</h2>
+                        {{ year_2024_plot|safe }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <h2 class="card-title">2025</h2>
+                        {{ year_2025_plot|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Table -->
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card shadow-sm animate__animated animate__fadeInUp">

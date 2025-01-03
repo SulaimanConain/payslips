@@ -17,6 +17,9 @@ df['Pay slip Date'] = pd.to_datetime(df['Pay slip Date'])
 # Sort the dataframe by date
 df = df.sort_values('Pay slip Date')
 
+# Extract year from the date
+df['Year'] = df['Pay slip Date'].dt.year
+
 # Calculate totals
 total_money_earned = df['Total Pay'].sum()
 total_tax_paid = df['Tax Paid'].sum()
@@ -39,58 +42,31 @@ last_two_weeks_total = last_two_weeks['Total Pay'].sum()
 last_two_weeks_tax = last_two_weeks['Tax Paid'].sum()
 last_two_weeks_without_tax = last_two_weeks['total without tax'].sum()
 
-# Create Plotly figure
-fig = make_subplots(
-    rows=3, cols=2,
-    subplot_titles=("Total Pay Over Time", "Tax Paid Over Time",
-                    "Salary Without Tax Over Time", "Proportion of Tax Paid to Total Pay",
-                    "Current Month Earnings", "Last Two Weeks Earnings"),
-    specs=[[{"type": "bar"}, {"type": "bar"}],
-           [{"type": "bar"}, {"type": "pie"}],
-           [{"type": "pie"}, {"type": "pie"}]],
-    vertical_spacing=0.1,
-    horizontal_spacing=0.1
-)
+# Function to create year-wise bar charts
+def create_year_wise_charts(year_df, year):
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['Total Pay'], name='Total Pay', marker_color='blue'))
+    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['Tax Paid'], name='Tax Paid', marker_color='red'))
+    fig.add_trace(go.Bar(x=year_df['Pay slip Date'], y=year_df['total without tax'], name='Salary Without Tax', marker_color='green'))
+    fig.update_layout(
+        title=f'Pay Slip Analysis for {year}',
+        xaxis_title='Date',
+        yaxis_title='Amount (CAD$)',
+        barmode='group'
+    )
+    return pio.to_html(fig, full_html=False)
 
-# Add existing plots
-fig.add_trace(go.Bar(x=df['Pay slip Date'], y=df['Total Pay'], name='Total Pay', marker_color='blue'), row=1, col=1)
-fig.add_trace(go.Bar(x=df['Pay slip Date'], y=df['Tax Paid'], name='Tax Paid', marker_color='red'), row=1, col=2)
-fig.add_trace(go.Bar(x=df['Pay slip Date'], y=df['total without tax'], name='Salary Without Tax', marker_color='green'), row=2, col=1)
+# Create year-wise plots
+year_2023_df = df[df['Year'] == 2023]
+year_2024_df = df[df['Year'] == 2024]
+year_2025_df = df[df['Year'] == 2025]
 
-# Pie chart for the proportion of Tax Paid to Total Pay
-labels = ['Tax Paid', 'Salary Without Tax']
-sizes = [total_tax_paid, total_without_tax]
-fig.add_trace(go.Pie(labels=labels, values=sizes, hole=.3, name='Proportion of Tax Paid to Total Pay'), row=2, col=2)
+year_2023_plot = create_year_wise_charts(year_2023_df, 2023)
+year_2024_plot = create_year_wise_charts(year_2024_df, 2024)
+year_2025_plot = create_year_wise_charts(year_2025_df, 2025)
 
-# Pie chart for current month earnings
-current_month_labels = ['Tax Paid', 'Salary Without Tax']
-current_month_sizes = [current_month_tax, current_month_without_tax]
-fig.add_trace(go.Pie(labels=current_month_labels, values=current_month_sizes, hole=.3, name='Current Month Earnings'), row=3, col=1)
-
-# Pie chart for last two weeks earnings
-last_two_weeks_labels = ['Tax Paid', 'Salary Without Tax']
-last_two_weeks_sizes = [last_two_weeks_tax, last_two_weeks_without_tax]
-fig.add_trace(go.Pie(labels=last_two_weeks_labels, values=last_two_weeks_sizes, hole=.3, name='Last Two Weeks Earnings'), row=3, col=2)
-
-# Update layout
-fig.update_layout(
-    height=1000,
-    margin=dict(l=50, r=50, b=50, t=80),
-    showlegend=False,
-    annotations=[dict(
-        text="Summary Table",
-        showarrow=False,
-        xref="paper", yref="paper",
-        x=0.5, y=-0.15,
-        xanchor='center', yanchor='bottom',
-        font=dict(size=14)
-    )]
-)
-
-# Set x-axis properties to ensure every month is displayed
-fig.update_xaxes(tickmode='linear', dtick='M1', tickformat='%b\n%Y', row=1, col=1)
-fig.update_xaxes(tickmode='linear', dtick='M1', tickformat='%b\n%Y', row=1, col=2)
-fig.update_xaxes(tickmode='linear', dtick='M1', tickformat='%b\n%Y', row=2, col=1)
+# Create combined plot for all years
+combined_plot = create_year_wise_charts(df, 'All Years')
 
 # Create summary table as HTML
 summary_table = pd.DataFrame({
@@ -101,7 +77,15 @@ summary_table = pd.DataFrame({
 # Home route
 @app.route('/')
 def index():
-    return render_template('index.html', plot_div=pio.to_html(fig, full_html=False), summary_table=summary_table)
+    return render_template(
+        'index.html',
+        plot_div=pio.to_html(fig, full_html=False),
+        summary_table=summary_table,
+        year_2023_plot=year_2023_plot,
+        year_2024_plot=year_2024_plot,
+        year_2025_plot=year_2025_plot,
+        combined_plot=combined_plot
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
